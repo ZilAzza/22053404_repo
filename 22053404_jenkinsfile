@@ -50,7 +50,7 @@ pipeline {
     
     stage('STG5') {
       steps {
-        echo "22053404 STG5: Web server testing result has neem inspected"
+        echo "22053404 STG5: Web server testing result has beem inspected"
         input(message: 'Proceed or Abort?', ok: 'Proceed')
       }
     }
