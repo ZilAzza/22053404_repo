@@ -1,0 +1,70 @@
+pipeline {
+
+  agent {
+    node {
+      label 'master'
+    }
+  }
+  
+  tool {
+    maven 'maven9'
+  }
+  
+  options {
+    buildDiscarder logRotator(
+      daysToKeepStr: '15',
+      numToKeepStr: '10'
+    )
+  }
+  
+  environment {
+    APP_NAME = "STUDENT_APP"
+    APP_ENV = "DEV"
+  }
+  
+  Stages {
+    
+    stage('STG1') {
+      steps {
+        echo "22053404 STG1: Push change to production web server?"
+        input(message: 'Proceed or Abort?', ok: 'Proceed')
+      }
+    }
+    
+    stage('STG2') {
+      steps {
+        Execute "bolt script run '/22053404_repo.git/22053404_script'"
+        echo "22053404 STG2 - Push to production web server completed"
+      }
+    }
+    
+    stage('STG3') {
+      steps {
+        echo "22053404 STG3: Proceedd to test production web service?"
+        input(message: 'Proceed or Abort?', ok: 'Proceed')
+      }
+    }
+    
+    stage('STG4') {
+      steps {
+        Execute "curl -ls https://22053404-websvr.localdomain |head -n 1 > /tmp/web-test-result"
+        echo "STG4: Production web server testing completed"
+      }
+    }
+    
+    stage('STG5') {
+      steps {
+        echo "22053404 STG5: Web server testing result has neem inspected"
+        input(message: 'Proceed or Abort?', ok: 'Proceed')
+      }
+    }
+    
+    stage('STG6') {
+      steps {
+        echo "22053404 STG6: Production Operation is successful"
+      }
+    }
+    
+  }
+
+}
