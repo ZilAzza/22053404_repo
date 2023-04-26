@@ -47,7 +47,7 @@ pipeline {
     
     stage('STG4') {
       steps {
-        Execute "curl -ls https://22053404-websvr.localdomain |head -n 1 > /tmp/web-test-result"
+        Execute curl -ls https://22053404-websvr.localdomain |head -n 1 > /tmp/web-test-result
         echo "STG4: Production web server testing completed"
       }
     }
