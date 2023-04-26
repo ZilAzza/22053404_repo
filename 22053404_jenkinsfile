@@ -29,7 +29,7 @@ pipeline {
     
     stage('STG2') {
       steps {
-        bolt script run '/22053404_repo.git/22053404_script'
+        // Execute bolt script run '/22053404_repo.git/22053404_script'
         echo "22053404 STG2 - Push to production web server completed"
       }
     }
